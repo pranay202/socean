@@ -16,6 +16,23 @@ social.use(cors());
 social.use('/posts', postRoutes);
 social.use("/user", userRouter);
 
+// --------------------------deployment------------------------------
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+app.use(express.static(path.join(__dirname, "./client/build"))),
+  app.get("*", function (_, res) {
+    res.sendFile(
+      path.join(__dirname, "./client/build/index.html"),
+      function (err) {
+        if (err) {
+          res.status(500).send(err);
+        }
+      }
+    );
+  });
+}
+
 const CONNECTION_URL = process.env.CONNECTION_URL || 'mongodb+srv://pranay:pranay2329@full-stack-projects.zjd6u.mongodb.net/?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;
 
