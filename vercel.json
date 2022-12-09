@@ -12,14 +12,6 @@
     {
       "src": "client/package.json",
       "use": "@vercel/node"
-    },
-    {
-      "src": "client/public/**/*",
-      "dest": "/public/"
-    },
-    {
-      "src": "client/src/**/*.{js,css,html}",
-      "dest": "/"
     }
   ],
   "routes": [
