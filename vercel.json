@@ -1,19 +1,30 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "./server/server.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "./client/build",   
-        "use": "@vercel/static"
-      }
-    ],
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/backend/server.js"
-      }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/public/**/*",
+      "dest": "/public/"
+    },
+    {
+      "src": "client/src/**/*.{js,css,html}",
+      "dest": "/"
+    }
+  ],
+  "routes": [
+    { "src": "/index.js", "dest": "index.js" },
+    { "src": "/api/(.*)", "dest": "index.js" },
+    { "src": "/(.*)", "dest": "client/build/index.html" }
+  ]
+}
