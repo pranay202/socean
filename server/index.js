@@ -13,17 +13,17 @@ social.use(express.json({ limit: '30mb', extended: true }))
 social.use(express.urlencoded({ limit: '30mb', extended: true }))
 social.use(cors());
 
-social.use('/posts', postRoutes);
-social.use("/user", userRouter);
 
 // --------------------------deployment------------------------------
 const __dirname = path.resolve();
+social.use('/posts',  require(path.join(__dirname, './routes/posts.js')));
+social.use("/user",  require(path.join(__dirname, './routes/user.js')));
 
 if (process.env.NODE_ENV === "production") {
-app.use(express.static(path.join(__dirname, "./client/build"))),
+app.use(express.static(path.join(__dirname, "../client/build"))),
   app.get("*", function (_, res) {
     res.sendFile(
-      path.join(__dirname, "./client/build/index.html"),
+      path.join(__dirname, "../client/build/index.html"),
       function (err) {
         if (err) {
           res.status(500).send(err);

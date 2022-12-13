@@ -15,10 +15,5 @@
       "source": "/(.*)",
       "destination": "/backend/index.js"
     }
-  ],
-  "routes": [
-    { "src": "/server/index.js", "dest": "index.js" },
-    { "src": "/api/(.*)", "dest": "index.js" },
-    { "src": "/(.*)", "dest": "client/build/index.html" }
   ]
 }
